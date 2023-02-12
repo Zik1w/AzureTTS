@@ -1,0 +1,6 @@
+requests
+wave
+pandas
+pydub
+ffmpeg-python
+waapi
