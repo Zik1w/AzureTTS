@@ -93,7 +93,7 @@ class AzureTextToSpeech(object):
         self.file_list = []                     ## 资源文件名
         self.language = lang
         self.SUBSCRIPTION_KEY = ''                                      ## 个人的Azure密钥，必填！
-        self.server = "eastasia"                                        ## 使用的Azure服务器（默认东亚）
+        self.SERVER = "eastasia"                                        ## 使用的Azure服务器（默认东亚）
         self.CONFIG_PATH = 'AzureTTS_Configuration.xlsx'                ## 设置表路径
         self.SCRIPT_PATH = 'AzureTTS_Script.xlsx'                       ## 台词表路径
         self.NORMALIZE_DBFS = -18.0                                     ## 响度标准化值
@@ -147,14 +147,14 @@ class AzureTextToSpeech(object):
             os.makedirs('TTSAudioFiles\\EN')
 
         ## 默认东亚服务器
-        fetch_token_url = 'https://' + self.server + '.api.cognitive.microsoft.com/sts/v1.0/issueToken'
+        fetch_token_url = 'https://' + self.SERVER + '.api.cognitive.microsoft.com/sts/v1.0/issueToken'
         headers = {
             'Ocp-Apim-Subscription-Key': self.SUBSCRIPTION_KEY
         }
         response = requests.post(fetch_token_url, headers=headers, verify=True) 
         access_token = str(response.text)
         print(">> 获取 Token：" + access_token)
-        constructed_url = 'https://' + self.server + '.tts.speech.microsoft.com/cognitiveservices/v1'
+        constructed_url = 'https://' + self.SERVER + '.tts.speech.microsoft.com/cognitiveservices/v1'
         headers = {
             ## 前面带有单词 Bearer 的授权令牌
             'Authorization': 'Bearer ' + access_token,
